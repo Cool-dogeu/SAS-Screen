@@ -200,7 +200,9 @@
                             <div class="latest_run_ranking">{{ recent_run.total_faults == 'Elim.' ? '🙅' : recent_run.ranking }}</div>
 
                             <div class="latest_run_content">
-                                <div class="latest_run_handler">{{ formatHandler(recent_run.handler) }} - {{ recent_run.dog_short }}</div>
+                                <div class="latest_run_handler" :style="{fontSize: scaleFont(formatHandler(recent_run.handler) + ' - ' + recent_run.dog_short, 26, 16)+'px'}">
+                                    {{ formatHandler(recent_run.handler) }} - {{ recent_run.dog_short }}
+                                </div>
                                 <div class="latest_run_results" v-if="recent_run.total_faults == 'Elim.'">--- ELIM ---</div>
                                 <div class="latest_run_results" v-else>{{ recent_run.dorsal }} | F: {{ recent_run.total_faults }} | T: {{ recent_run.course_time }}s</div>
                             </div>
