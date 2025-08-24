@@ -450,7 +450,7 @@ computed: {
                 return arr.length > 1 ? (arr[1] + " " + arr[0]).trim() : handler_name;
             },
 
-            scaleFont(str, max, base=24) {
+            scaleFont(str, max, base=15) {
                 let pxh = base;
                 if (!str) return pxh;
                 if (str.length > max) pxh = pxh * max / str.length;
