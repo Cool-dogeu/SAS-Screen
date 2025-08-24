@@ -160,11 +160,15 @@
 
                     <div class="card-content">
                         
-                        <div v-if="live_status.team_name" class="info-team" :style="{'--length': live_status.team_name.length}">{{ live_status.team_name }}</div>    
+                        <div v-if="live_status.team_name" class="info-team" :style="{fontSize: scaleFont(live_status.team_name, 20, 24)+'px'}">
+                            {{ live_status.team_name }}
+                        </div>    
                         <div v-if="live_status.team_name" class="info-separator"></div>
-                        <div class="info-handler" :style="{'--length': live_status.handler.length}">{{ live_status.handler }}</div>
+                        <div class="info-handler" :style="{fontSize: scaleFont(live_status.handler, 20, 24)+'px'}">
+                            {{ live_status.handler }}
+                        </div>
                         <div class="info-separator"></div>
-                        <div class="info-dog" :style="{'--length': live_status.dog_call_name.length}">{{ live_status.dog_call_name }}</div>
+                        <div class="info-dog" :style="{fontSize: scaleFont(live_status.dog_call_name, 20, 24)+'px'}">{{ live_status.dog_call_name }}</div>
 
                         <div v-if="live_status.is_eliminated" class="info-dis">
                                 ELIMINATED
@@ -444,8 +448,8 @@ computed: {
                 return arr.length > 1 ? (arr[1] + " " + arr[0]).trim() : handler_name;
             },
 
-            scaleFont(str, max) {
-                let pxh = 15;
+            scaleFont(str, max, base=24) {
+                let pxh = base;
                 if (!str) return pxh;
                 if (str.length > max) pxh = pxh * max / str.length;
                 if (pxh < 10) pxh = 10;

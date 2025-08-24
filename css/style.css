@@ -158,7 +158,8 @@ body {
     display: block;
     overflow: hidden;
     text-align: center;
-    font-size: calc(24px - (0.7px * (min(30, max(0, (var(--length, 0) - 20))))));
+    font-size: 24px; 
+    /*calc(24px - (0.7px * (min(30, max(0, (var(--length, 0) - 20))))));*/
 }
 
 .info-dog {
@@ -169,7 +170,8 @@ body {
     display: block;
     overflow: hidden;
     text-align: center;
-    font-size: calc(24px - (0.7px * (min(30, max(0, (var(--length, 0) - 20))))));
+    font-size: 24px;
+    /*calc(24px - (0.7px * (min(30, max(0, (var(--length, 0) - 20))))));*/
 }
 
 .info-dis {
@@ -193,7 +195,8 @@ body {
     display: block;
     overflow: hidden;
     text-align: center;
-    font-size: calc(24px - (0.7px * (min(30, max(0, (var(--length, 0) - 20))))));
+    font-size: 24px;
+    /*calc(24px - (0.7px * (min(30, max(0, (var(--length, 0) - 20))))));*/
 }
 
 .info-separator {
