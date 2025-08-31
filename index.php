@@ -159,16 +159,20 @@
                     </div>
 
                     <div class="card-content">
-                        
-                        <div v-if="live_status.team_name" class="info-team" :style="{fontSize: scaleFont(live_status.team_name, 20, 24)+'px'}">
-                            {{ live_status.team_name }}
-                        </div>    
+                        <div v-if="is_team">
+                            <div v-if="live_status.team_name" class="info-team" :style="{fontSize: scaleFont(live_status.team_name, 20, 24)+'px'}">
+                                {{ live_status.team_name }}
+                            </div>
+                        </div>
+
                         <div v-if="live_status.team_name" class="info-separator"></div>
                         <div class="info-handler" :style="{fontSize: scaleFont(live_status.handler, 20, 24)+'px'}">
                             {{ live_status.handler }}
                         </div>
                         <div class="info-separator"></div>
-                        <div class="info-dog" :style="{fontSize: scaleFont(live_status.dog_call_name, 20, 24)+'px'}">{{ live_status.dog_call_name }}</div>
+                        <div class="info-dog" :style="{fontSize: scaleFont(live_status.dog_call_name, 20, 24)+'px'}">
+                            {{ live_status.dog_call_name }}
+                        </div>
 
                         <div v-if="live_status.is_eliminated" class="info-dis">
                                 ELIMINATED
@@ -272,11 +276,7 @@
             startlist_count: 0,
             show_now_in_ring: false
         },
-computed: {
-            isTeam() {
-                return this.live_status.participation_type === 't';
-            },
-            
+computed: {           
             // Helper method to calculate trimming limits
             calculatedLimits() {
                 const minStartlist = this.STARTLIST_MIN_VISIBLE;
