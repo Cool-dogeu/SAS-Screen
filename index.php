@@ -223,18 +223,18 @@
 
                     <div class="card-content">
                         <div class="latest_run" v-for="run in ranked_team_runs" :key="run.team_name">
-                            
+
                             <div class="latest_run_ranking" v-if="run.total_team_time == 0">🙅</div>
                             <div v-else>
                                 <div class="latest_run_ranking" v-if="run.ranking == 'Incomplete'">🏃</div>
                                 <div class="latest_run_ranking" v-else>{{ run.ranking }}</div>
                             </div>
-                            
+
                             <div class="latest_run_content">
                                 <div class="latest_run_handler">{{ run.team_name }}</div>
-                                
+
                                 <div class="latest_run_results" v-if="run.total_faults == 'Elim.'">--- ELIM ---</div>
-                                <div class="latest_run_results" v-else>F: {{ run.total_team_faults }} | T: {{ run.total_team_time }}s</div>
+                                <!-- <div class="latest_run_results" v-else>F: {{ run.total_team_faults }} | T: {{ run.total_team_time }}s</div> -->
                             </div>
                         </div>
                     </div>
@@ -276,7 +276,7 @@
             startlist_count: 0,
             show_now_in_ring: false
         },
-computed: {           
+computed: {
             // Helper method to calculate trimming limits
             calculatedLimits() {
                 const minStartlist = this.STARTLIST_MIN_VISIBLE;
@@ -290,17 +290,17 @@ computed: {
                 const resultsTrimmed = effectiveResultsLength > remainingSpace;
                 const spaceForResultsFooter = resultsTrimmed ? 1 : 0;
                 let maxResults = Math.min(effectiveResultsLength, remainingSpace - spaceForResultsFooter);
-                
+
                 const usedSpace = startlistToShow + maxResults + spaceForResultsFooter;
                 const extraSpace = maxEntries - usedSpace;
                 if (extraSpace > 0 && totalStartlist > startlistToShow) {
                     const extraStartlist = Math.min(extraSpace, totalStartlist - startlistToShow);
                     startlistToShow += extraStartlist;
                 }
-                
+
                 const startlistTrimmed = totalStartlist > startlistToShow;
                 const spaceForStartlistFooter = startlistTrimmed ? 1 : 0;
-                
+
                 if (resultsTrimmed && startlistTrimmed) {
                     if (startlistToShow + spaceForStartlistFooter + maxResults + spaceForResultsFooter > maxEntries) {
                         startlistToShow = Math.min(totalStartlist, minStartlist);
@@ -316,27 +316,27 @@ computed: {
                     effectiveResultsLength
                 };
             },
-            
+
             trimmedResults() {
                 return this.ranked_runs.slice(0, this.calculatedLimits.maxResults);
             },
-            
+
             isResultsTrimmed() {
                 return this.calculatedLimits.resultsTrimmed;
             },
-            
+
             invisibleResultsCount() {
                 return Math.max(0, this.ranked_runs.length - this.calculatedLimits.maxResults);
             },
-            
+
             trimmedStartlist() {
                 return this.runs.slice(0, this.calculatedLimits.startlistToShow);
             },
-            
+
             isStartlistTrimmed() {
                 return this.calculatedLimits.startlistTrimmed;
             },
-            
+
             invisibleStartlistCount() {
                 return Math.max(0, this.runs.length - this.calculatedLimits.startlistToShow);
             }
@@ -352,7 +352,7 @@ computed: {
                             setTimeout(this.fetchLiveJson, 1000);
                             return;
                         }
-                        
+
                         try
                         {
                             const live_data = JSON.parse(data.live_json) || {};
@@ -376,7 +376,7 @@ computed: {
                             {
                                 let individual_progress = JSON.parse(data.ind_progress);
                                 this.ring_info = individual_progress.round || {};
-                                
+
                                 this.runs = individual_progress.runs;
                                 this.runs.forEach(run => {
                                     if (run.country_name === "") {
@@ -386,7 +386,7 @@ computed: {
 
                                 this.ranked_runs = individual_progress.rankedRuns;
                                 this.latest_runs = individual_progress.latestRuns;
-                                
+
                                 this.progress_info = individual_progress.progress || {};
                                 this.progress_info.runs_left = this.progress_info.runs_total;
                                 this.progress_info.runs_total += this.progress_info.runs_completed;
@@ -394,7 +394,7 @@ computed: {
 
                                 this.startlist_count = this.runs.length;
                                 this.results_count = this.ranked_runs.length;
-                                
+
                                 console.log(this.latest_runs);
                             }
 
@@ -459,7 +459,7 @@ computed: {
             },
 
             getFlag(country_name) {
-                return this.flag_map[country_name.replace(" ","")] + ".svg"; 
+                return this.flag_map[country_name.replace(" ","")] + ".svg";
             }
         },
         mounted() {
